@@ -1,0 +1,10 @@
+SELECT titulo as Título_do_Livro
+     , qtde as Quantidade_do_Livro
+     , autor as Autor_do_Livro
+     , biblioteca_coc.website as Site_da_Biblio
+     , e.editoranome as Nome_da_Editora
+     , (select dbo.fnGetFoneEditora(e.CNPJ)) as Telefone_da_Editora -- < Function sendo usada
+  FROM livro 
+ INNER JOIN editora e on cnpj_editora = e.cnpj
+ INNER JOIN biblioteca_coc on biblioteca_coc.cnpj = biblioteca_coc.cnpj
+ INNER JOIN editora_telefone on editora_telefone.cnpj_editora = e.cnpj
